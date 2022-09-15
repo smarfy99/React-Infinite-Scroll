@@ -9,7 +9,7 @@ export interface Data {
   body: string;
 }
 
-const mockAPI = () => {
+const MockAPI = () => {
   const [data, setData] = useState<Data[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
@@ -24,7 +24,7 @@ const mockAPI = () => {
         setData(response.data);
         setLoading(false);
       } catch (e) {
-        setError(e);
+        setError(error);
         console.log(e);
         setLoading(false);
       }
@@ -34,4 +34,4 @@ const mockAPI = () => {
   return [data, loading, error] as [Data[], boolean, Error];
 };
 
-export default mockAPI;
+export default MockAPI;

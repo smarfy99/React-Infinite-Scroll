@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import mockAPI from "./API/mockAPI";
+import MockAPI from "./API/MockAPI";
 import styled from "styled-components";
 
 function App() {
-  const [data, loading, error] = mockAPI();
+  const [data, loading, error] = MockAPI();
 
   if (loading) {
     return <div>loading...</div>;

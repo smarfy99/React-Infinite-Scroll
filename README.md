@@ -1,2 +1,3 @@
 # React-Infinite-Scroll
-리액트로 무한스크롤 뿌수기 도전
+- MockAPI 라는 커스텀 훅을 만들어서 json mock server에서 데이터 패칭
+- 무한 스크롤 (탑재 중)

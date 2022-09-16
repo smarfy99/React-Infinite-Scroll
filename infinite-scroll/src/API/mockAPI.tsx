@@ -10,9 +10,11 @@ export interface Data {
 }
 
 const MockAPI = () => {
-  const [data, setData] = useState<Data[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error>();
+  const [data, setData] = useState<Data[]>([]); //API로부터 받아온 데이터를 배열에 저장 state
+  const [loading, setLoading] = useState<boolean>(false); //로딩중인지를 알기 위한 state
+  const [error, setError] = useState<Error | unknown>(); //error 핸들링을 위한 state
+  const [paging, setPaging] = useState<Data>({next : undefined});
+
 
   useEffect(() => {
     setLoading(true);
@@ -23,11 +25,11 @@ const MockAPI = () => {
         );
         setData(response.data);
         setLoading(false);
-      } catch (e) {
+      } catch (error) {
         setError(error);
-        console.log(e);
-        setLoading(false);
+        console.log(error);
       }
+      setLoading(false);
     };
     getData();
   }, []);

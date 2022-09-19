@@ -1,32 +1,17 @@
-import React, { useEffect, useState, useCallback } from "react";
-import MockAPI from "../API/MockAPI";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-//useFetch라는 커스텀 훅 생성
-
-const IntersectionObserverAPI = (
-  onIntersect: () => void,
-  options?: IntersectionObserverInit
-) => {
-  const [target, setTarget] = useState<Element | null>(null);
-
-  const handleIntersect = useCallback(
-    ([entry]: IntersectionObserverEntry[]) => {
-      if (entry.isIntersecting) {
-        onIntersect();
-      }
-    },
-    [onIntersect]
-  );
+// 페이지 컨텐츠 끝에 도달하면 다음페이지의 내용을 API에 요청(query)해서 페이지 하단에 append
+export default function useBookSearch(query : string, pageNum : number) {
 
   useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersect, options);
-    target && observer.observe(target);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [handleIntersect, target, options]);
-  return [setTarget];
-};
-
-export default IntersectionObserverAPI;
+    axios({
+      method: "GET",
+      url: "http://openlibrary.org/search.json",
+      params: { q: query, page: pageNum },
+    }).then((res) => {
+      console.log(res.data);
+    });
+  }, [query, pageNum]);
+  return null
+}

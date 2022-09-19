@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import MockAPI from "./API/MockAPI";
 import styled from "styled-components";
+import { useState, useEffect, useCallback } from "react";
+import IntersectionObserverAPI from "./InfiniteScroll/IntersectionObserverAPI";
 
 function App() {
   const [data, loading, error] = MockAPI();
@@ -10,12 +12,18 @@ function App() {
     return <div>loading...</div>;
   }
 
+  if (error) {
+    return console.log("error 발생 삐용삐용");
+  }
+
   return (
-    <Container>
-      {data.map((item, index) => (
-        <Card key={index} item={item}></Card>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {data?.map((item, index) => (
+          <Card key={index} item={item}></Card>
+        ))}
+      </Container>
+    </>
   );
 }
 

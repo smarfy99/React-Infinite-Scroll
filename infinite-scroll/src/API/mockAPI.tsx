@@ -9,10 +9,20 @@ export interface Data {
   body: string;
 }
 
+export interface PageInfoType {
+  page: number;
+  totalPage: number;
+}
+
 const MockAPI = () => {
   const [data, setData] = useState<Data[]>([]); //API로부터 받아온 데이터를 배열에 저장 state
   const [loading, setLoading] = useState<boolean>(false); //로딩중인지를 알기 위한 state
   const [error, setError] = useState<Error | unknown>(); //error 핸들링을 위한 state
+  const [pageInfo, setPageInfo] = useState<PageInfoType>({
+    page: 1,
+    totalPage: 1,
+  });
+  const [target, setTarget] = useState<Element | null>(null);
 
   useCallback(() => {
     setLoading(true);
@@ -31,7 +41,13 @@ const MockAPI = () => {
     };
     getData();
   }, []);
-  return [data, loading, error] as [Data[], boolean, Error];
+  return [data, loading, error, pageInfo, target] as [
+    Data[],
+    boolean,
+    Error,
+    PageInfoType,
+    Element
+  ];
 };
 
 export default MockAPI;

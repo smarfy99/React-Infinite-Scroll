@@ -6,36 +6,38 @@ import useBookSearch from "./InfiniteScroll/IntersectionObserverAPI";
 import { getSuggestedQuery } from "@testing-library/react";
 
 function App() {
-//   const [data, loading, error] = MockAPI();
+  //   const [data, loading, error] = MockAPI();
 
-//   if (loading) {
-//     return <div>loading...</div>;
-//   }
+  //   if (loading) {
+  //     return <div>loading...</div>;
+  //   }
 
-//   if (error) {
-//     return console.log("error 발생 삐용삐용");
-//   }
+  //   if (error) {
+  //     return console.log("error 발생 삐용삐용");
+  //   }
 
-//   return (
-//     <>
-//       <Container>
-//         {data?.map((item, index) => (
-//           <Card key={index} item={item}></Card>
-//         ))}
-//       </Container>
-//     </>
-//   );
-// }
-const [query, setQuery] = useState<string>('');
-const [pageNum, setPageNum] = useState<number>(1);
+  //   return (
+  //     <>
+  //       <Container>
+  //         {data?.map((item, index) => (
+  //           <Card key={index} item={item}></Card>
+  //         ))}
+  //       </Container>
+  //     </>
+  //   );
+  // }
+  const [query, setQuery] = useState<string>("");
+  const [pageNum, setPageNum] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | unknown>();
 
-  function handleSearch(e : any){
+  function handleSearch(e: any) {
     getSuggestedQuery(e.target.value);
     setPageNum(1);
   }
 
   useBookSearch(query, pageNum);
-  return(
+  return (
     <>
       <input type="text" onChange={handleSearch}></input>
       <div>Title</div>
@@ -45,8 +47,8 @@ const [pageNum, setPageNum] = useState<number>(1);
       <div>Loading...</div>
       <div>Error</div>
     </>
-  )
-
+  );
+}
 export default App;
 
 // //container 관련

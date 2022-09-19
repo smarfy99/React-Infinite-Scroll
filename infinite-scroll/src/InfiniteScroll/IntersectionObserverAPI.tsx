@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // 페이지 컨텐츠 끝에 도달하면 다음페이지의 내용을 API에 요청(query)해서 페이지 하단에 append
-export default function useBookSearch(query : string, pageNum : number) {
-
+export default function useBookSearch(query: string, pageNum: number) {
   useEffect(() => {
     axios({
       method: "GET",
@@ -13,5 +12,5 @@ export default function useBookSearch(query : string, pageNum : number) {
       console.log(res.data);
     });
   }, [query, pageNum]);
-  return null
+  return null;
 }

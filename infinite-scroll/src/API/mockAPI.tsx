@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios, { AxiosResponse } from "axios";
 
 export interface Data {
@@ -13,10 +13,8 @@ const MockAPI = () => {
   const [data, setData] = useState<Data[]>([]); //API로부터 받아온 데이터를 배열에 저장 state
   const [loading, setLoading] = useState<boolean>(false); //로딩중인지를 알기 위한 state
   const [error, setError] = useState<Error | unknown>(); //error 핸들링을 위한 state
-  const [paging, setPaging] = useState<Data[]>({next : undefined});
 
-
-  useEffect(() => {
+  useCallback(() => {
     setLoading(true);
     const getData = async () => {
       try {
@@ -33,7 +31,7 @@ const MockAPI = () => {
     };
     getData();
   }, []);
-  return [data, loading, error,paging] as [Data[], boolean, Error, Data[]];
+  return [data, loading, error] as [Data[], boolean, Error];
 };
 
 export default MockAPI;
